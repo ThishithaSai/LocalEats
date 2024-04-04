@@ -1,0 +1,143 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <title>About</title> 
+ <style> 
+ body { 
+ font-family: Arial, Helvetica, sans-serif; 
+ margin: 0; 
+ background:linear-gradient(to right,whitesmoke,rgb(124, 130, 132)); 
+} 
+html { 
+ box-sizing: border-box; 
+} 
+*, *:before, *:after { 
+ box-sizing: inherit; 
+} 
+.column { 
+ float: left; 
+ width: 33.3%; 
+ margin-bottom: 16px; 
+ padding: 0 8px; 
+} 
+.card { 
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+ margin: 8px; 
+ background-color: rgb(223, 234, 230);
+ padding: 5px 5px;
+} 
+.about-section { 
+ padding: 30px; 
+ text-align: center; 
+ color: black; 
+} 
+.container { 
+ padding: 0 16px; 
+} 
+.container::after, .row::after { 
+ content: ""; 
+ clear: both; 
+ display: table; 
+} 
+.title { 
+ color: grey; 
+} 
+.button { 
+ border: none; 
+ outline: 0; 
+ display: inline-block; 
+ padding: 8px; 
+ color: white; 
+ background-color: #000; 
+ text-align: center; 
+ cursor: pointer; 
+ width: 100%; 
+} 
+.row{ 
+ display: flex; 
+} 
+.button:hover { 
+ background-color: #555; 
+} 
+@media screen and (max-width: 650px) { 
+ .column { 
+ width: 100%; 
+ display: block; 
+ } 
+} 
+#about{ 
+ display: flex; 
+} 
+.sub{ 
+ color: rgb(0, 112, 186); 
+} 
+ </style> 
+</head> 
+<body> 
+ <div class="about-section"> 
+ 
+ <div id="about"> 
+ <div class="landimage"> 
+ <img src="images/home5.jpg" alt="" width="450px" height="450px"> 
+ </div> 
+ <div class="landing"> 
+ <h1><b>ABOUT</b></h1> 
+ <br> 
+ <br> 
+ <br> 
+ <h1 class="sub">Local Eats....!</h1> 
+ <p>Welcome to our community-driven restaurant recommender, where gastronomy meets community spirit! At Local Eats, we are passionate about connecting food enthusiasts with exceptional dining experiences. Our platform is more than just a restaurant directory; it's a vibrant community where food lovers come together to share their favorite culinary gems and discover new epicurean delights..</p> 
+ </div> 
+ </div> 
+ <h2 style="text-align:center" class="sub">Our Team</h2> 
+ <div class="row"> 
+ <div class="column"> 
+ <div class="card"> 
+ 
+ <div class="container"> 
+ <h2> Sai Thishitha Chakala</h2> 
+ <p class="title">CEO & Founder</p> 
+ <p>thi123@gmail.com</p> 
+ <a href="contact.html"><button 
+class="button">Contact</button></a> 
+ </div> 
+ </div> 
+ </div> 
+ 
+ <div class="column"> 
+ <div class="card"> 
+ 
+ <div class="container"> 
+ <h2>Sameera Anupuru</h2> 
+ <p class="title">Data Analyst</p> 
+ <p>mee786@gmail.com</p> 
+ <a href="contact.html"><button class="button">Contact</button></a> 
+ </div> 
+ </div> 
+ </div> 
+ 
+ <div class="column"> 
+ <div class="card">
+ <div class="container"> 
+ <h2>Bhavani Gajjala</h2> 
+ <p class="title">Content Moderator</p> 
+ <p>204gfh@gmail.com</p> 
+ <a href="contact.html"><button class="button">Contact</button></a> 
+ </div> 
+ </div> 
+ </div> 
+ <div class="column"> 
+ <div class="card"> 
+ 
+ <div class="container"> 
+ <h2>Meenakshi Chennuru</h2> 
+ <p class="title">Developer</p> 
+ <p>chen0568@gmail.com</p> 
+ <a href="contact.html"><button class="button">Contact</button></a> 
+ </div> 
+ </div> 
+ </div> 
+ 
+</body> 

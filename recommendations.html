@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Community Food Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background:linear-gradient(to bottom,whitesmoke,rgb(124, 130, 132))  ;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .recommendation {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .recommendation h2 {
+            margin-top: 0;
+        }
+
+        .recommendation p {
+            margin-bottom: 10px;
+        }
+
+        .recommendation img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #333;
+            font-size: 14px;
+            padding: 4px 8px;
+            margin-right: 8px;
+            border-radius: 4px;
+        }
+
+        .health-form {
+            margin-top: 40px;
+            margin-bottom: 30px;
+
+        }
+
+        .health-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .health-form input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .health-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        img{
+            width: 100px;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Community Food Recommendations</h1>
+    </header>
+
+    <div class="container">
+        <div class="health-form">
+            <h2>Find Food According to Your Health Condition</h2>
+            <form id="healthForm" action="#">
+                <label for="health_condition">Enter your health condition:</label>
+                <input type="text" id="health_condition" name="health_condition" placeholder="e.g., Diabetes, Gluten intolerance, etc." required>
+                <button type="submit">Find Food</button>
+            </form>
+        </div>
+        <div class="recommendation">
+            <h2>Best Burger Joint in Town</h2>
+            <p>If you're a burger enthusiast, you must visit Burger Haven! Their juicy patties and delicious toppings will leave you craving for more.</p>
+            <img src="images/burger.jpeg" alt="Burger">
+            <span class="tag">Non-Vegetarian</span>
+        </div>
+
+        <div class="recommendation">
+            <h2>Taco Tuesday at Tasty Tacos</h2>
+            <p>Looking for a place to satisfy your taco cravings? Tasty Tacos offers a wide variety of tacos with fresh ingredients and flavorful sauces.</p>
+            <img src="images/tacos.jpg" alt="Tacos">
+            <span class="tag">Vegetarian</span>
+        </div>
+
+        <div class="recommendation">
+            <h2>Authentic Italian Pizza</h2>
+            <p>For the best Italian pizza experience, head over to Pizza Italia. Their thin crust pizzas topped with authentic Italian ingredients will transport you to Italy.</p>
+            <img src="images/pizza.jpeg" alt="Pizza">
+            <span class="tag">Vegetarian</span>
+        </div>
+
+        
+    </div>
+
+    <script>
+        document.getElementById("healthForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var healthCondition = document.getElementById("health_condition").value.toLowerCase();
+            if (healthCondition === "diabetes") {
+                window.location.href = "diabetics.html";
+            } else if (healthCondition === "gluten intolerance") {
+                window.location.href = "gluten.html";
+            } else {
+                alert("Sorry, we currently do not have specific recommendations for this health condition.");
+            }
+        });
+    </script>
+</body>
+</html>
