@@ -25,6 +25,35 @@ mongoose.connect('mongodb://127.0.0.1:27017/localeats')
 .catch((err)=>{console.log("Error in connection" + err.stack)
 process.exit(1)
 })
+const Review = mongoose.model("review",new mongoose.Schema({
+    rating:Number,
+    reviewText:String,
+},
+{
+    collection:"reviews"
+}
+)) ;
+
+app.post("/submit-reviews",async(req,res)=>{
+    const{rating,reviewText}=req.body;
+    try{
+        const review= await Review.create({rating,reviewText});
+        res.status(201).json({message:"Review submitted succesfully",review})
+    }catch(error){
+        console.error("Failed to submit review",error);
+        res.status(500).json({message:"Internal Server error"});
+    }
+});
+
+app.get("/reviews",async(req,res)=>{
+    try{
+        const reviews=await Review.find();
+        res.json(reviews);
+    }catch(error){
+        console.error("Failed to fetch reviews",error);
+        res.status(500).json({message:"Internal Server Error"});
+    }
+});
 
 
 app.post("/register",async (req,res)=>{
@@ -95,5 +124,14 @@ app.get("/register",(req,res)=>{
 
 app.get("/gluten",(req,res)=>{
     res.sendFile(__dirname+"/gluten.html")
+})
+app.get("/bloodpressure",(req,res)=>{
+    res.sendFile(__dirname+"/bloodpressure.html")
+})
+app.get("/obesity",(req,res)=>{
+    res.sendFile(__dirname+"/obesity.html")
+})
+app.get("/skin",(req,res)=>{
+    res.sendFile(__dirname+"/skin.html")
 })
 app.listen(port,()=>console.log(`Server is running in http://localhost:${port}`))

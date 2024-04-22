@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+            background:linear-gradient(to right,whitesmoke,rgb(124, 130, 132)); 
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .rating > span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+            font-size: 24px;
+            cursor: pointer;
+            color: gold;
+        }
+        .rating > span:hover:before,
+        .rating > span:hover ~ span:before {
+            content: "\2605";
+            position: absolute;
+        }
+
+        .review-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        .review-text {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Submit Review</h1>
+    <div class="rating">
+        <span onclick="setRating(5)">&#x2606;</span>
+        <span onclick="setRating(4)">&#x2606;</span>
+        <span onclick="setRating(3)">&#x2606;</span>
+        <span onclick="setRating(2)">&#x2606;</span>
+        <span onclick="setRating(1)">&#x2606;</span>
+    </div>
+    <div class="review-container">
+        <textarea id="review" class="review-text" placeholder="Write your review here..."></textarea>
+        <br>
+        <button class="submit-btn" onclick="submitReview()">Submit Review</button>
+    </div>
+    <div class="reviews-container" id="reviews-container">
+        <!-- Reviews will be dynamically added here -->
+    </div>
+
+    <script>
+        let selectedRating = 0;
+
+        function setRating(rating) {
+            selectedRating = rating;
+            document.querySelectorAll('.rating > span').forEach((star, index) => {
+                if (index < rating) {
+                    star.innerHTML = '&#x2605;';
+                } else {
+                    star.innerHTML = '&#x2606;';
+                }
+            });
+        }
+
+       async function submitReview() {
+    const reviewText = document.getElementById('review').value;
+
+    // Check if review text is empty
+    if (!reviewText) {
+        alert("Please write your review before submitting.");
+        return;
+    }
+
+    // Construct the review data object
+    const reviewData = {
+        rating: selectedRating,
+        reviewText: reviewText
+    };
+
+    // Send a POST request to the backend
+    fetch('/submit-reviews', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Failed to submit review');
+    })
+    .then(data => {
+        console.log('Review submitted successfully:', data);
+        // Optionally, you can display a success message to the user
+        alert('Review submitted successfully!');
+    })
+    .catch(error => {
+        console.error('Failed to submit review:', error);
+        // Optionally, you can display an error message to the user
+        alert('Failed to submit review. Please try again later.');
+    });
+
+    // Clear the review text field
+    document.getElementById('review').value = '';
+
+    // Reset stars to default (unfilled)
+    setRating(0);
+
+    await fetchReviews();
+}
+
+async function fetchReviews() {
+            try {
+                const response = await fetch('/reviews');
+                const reviews = await response.json();
+                renderReviews(reviews);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        }
+
+        function renderReviews(reviews) {
+    const reviewsContainer = document.getElementById('reviews-container');
+    reviewsContainer.innerHTML = ''; // Clear existing reviews
+    reviews.forEach(review => {
+        const reviewElement = document.createElement('div');
+        reviewElement.innerHTML = `Rating: ${renderStars(review.rating)}, Review: ${review.reviewText}`;
+        reviewsContainer.appendChild(reviewElement);
+    });
+}
+
+function renderStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '&#x2605;'; // Full star
+        } else {
+            stars += '&#x2606;'; // Empty star
+        }
+    }
+    return stars;
+}
+
+        fetchReviews();
+    </script>
+    
+</body>
+</html>
